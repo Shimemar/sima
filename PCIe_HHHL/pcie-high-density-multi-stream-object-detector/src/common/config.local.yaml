@@ -1,0 +1,104 @@
+# PCIe profile: 48 x 720p at 10 FPS.
+profile:
+  name: 48x720p10fps
+
+model:
+  path: /home/sima/models/yolo26n-det-int8-b1.tar.gz
+  labels: examples/object-detection/high-density-multi-stream-object-detector/src/common/coco_label.txt
+  decode_type: yolo26
+
+card:
+  card_id: 0
+  queue: 0
+
+# Populate exactly 48 URLs.
+streams: 
+  - rtsp://10.0.0.1:8554/src1
+  - rtsp://10.0.0.1:8554/src2
+  - rtsp://10.0.0.1:8554/src3
+  - rtsp://10.0.0.1:8554/src4
+  - rtsp://10.0.0.1:8554/src5
+  - rtsp://10.0.0.1:8554/src6
+  - rtsp://10.0.0.1:8554/src7
+  - rtsp://10.0.0.1:8554/src8
+  - rtsp://10.0.0.1:8554/src9
+  - rtsp://10.0.0.1:8554/src10
+  - rtsp://10.0.0.1:8554/src11
+  - rtsp://10.0.0.1:8554/src12
+  - rtsp://10.0.0.1:8554/src13
+  - rtsp://10.0.0.1:8554/src14
+  - rtsp://10.0.0.1:8554/src15
+  - rtsp://10.0.0.1:8554/src16
+  - rtsp://10.0.0.1:8554/src1
+  - rtsp://10.0.0.1:8554/src2
+  - rtsp://10.0.0.1:8554/src3
+  - rtsp://10.0.0.1:8554/src4
+  - rtsp://10.0.0.1:8554/src5
+  - rtsp://10.0.0.1:8554/src6
+  - rtsp://10.0.0.1:8554/src7
+  - rtsp://10.0.0.1:8554/src8
+  - rtsp://10.0.0.1:8554/src9
+  - rtsp://10.0.0.1:8554/src10
+  - rtsp://10.0.0.1:8554/src11
+  - rtsp://10.0.0.1:8554/src12
+  - rtsp://10.0.0.1:8554/src13
+  - rtsp://10.0.0.1:8554/src14
+  - rtsp://10.0.0.1:8554/src15
+  - rtsp://10.0.0.1:8554/src16
+  - rtsp://10.0.0.1:8554/src1
+  - rtsp://10.0.0.1:8554/src2
+  - rtsp://10.0.0.1:8554/src3
+  - rtsp://10.0.0.1:8554/src4
+  - rtsp://10.0.0.1:8554/src5
+  - rtsp://10.0.0.1:8554/src6
+  - rtsp://10.0.0.1:8554/src7
+  - rtsp://10.0.0.1:8554/src8
+  - rtsp://10.0.0.1:8554/src9
+  - rtsp://10.0.0.1:8554/src10
+  - rtsp://10.0.0.1:8554/src11
+  - rtsp://10.0.0.1:8554/src12
+  - rtsp://10.0.0.1:8554/src13
+  - rtsp://10.0.0.1:8554/src14
+  - rtsp://10.0.0.1:8554/src15
+  - rtsp://10.0.0.1:8554/src16
+
+input:
+  codec: h264
+  tcp: true
+  latency_ms: 100
+  startup_stagger_ms: 50
+  width: 1280
+  height: 720
+  fps: 10
+  decoder_buffers: 4
+  decoder_input_buffers: 4
+  decoder_tuning: throughput-low-latency
+
+pcie:
+  queue_size: 256
+  buffer_size: 4194304
+  pool_size: 4
+  max_inflight_per_stream: 1
+  max_inflight_total: 8
+  result_timeout_ms: 30000
+  correlation_cache_size: 256
+
+inference:
+  queue_depth: 16
+  internal_queue_depth: 2
+  max_inflight_per_stream: 1
+  max_inflight_total: 8
+  min_score: 0.30
+  nms_iou: 0.60
+  max_detections: 50
+
+runtime:
+  profile: false
+  warmup_frames: 30
+
+output:
+  insight:
+    host: 127.0.0.1
+    video_port_base: 9000
+    metadata_port_base: 9100
+  video_enabled: true
