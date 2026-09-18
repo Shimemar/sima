@@ -1,0 +1,6 @@
+{
+  "input": "/workspace/prebuilt-apps/examples/genai/multimodal-assistant_e5/corpus.md",
+  "collection": "demo_collection",
+  "embedding_model": "/media/nvme/llima/models/multilingual-e5-small",
+  "chunks": 24
+}
