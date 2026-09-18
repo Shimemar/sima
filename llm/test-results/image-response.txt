@@ -1,0 +1,20 @@
+data: {"choices":[{"delta":{"content":"部屋"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk"}
+
+data: {"choices":[{"delta":{"content":"の一部"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","ttft":0.238077691}
+
+data: {"choices":[{"delta":{"content":"が写"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","tps":34.61947330833415}
+
+data: {"choices":[{"delta":{"content":"っており、木"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","tps":34.69009654288558}
+
+data: {"choices":[{"delta":{"content":"製の家具"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","tps":34.81794861072729}
+
+data: {"choices":[{"delta":{"content":"やドア、壁"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","tps":34.906779699473574}
+
+data: {"choices":[{"delta":{"content":"が見"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","tps":34.876875735051954}
+
+data: {"choices":[{"delta":{"content":"えます。"},"finish_reason":null,"index":0}],"created":1789523368,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","tps":34.99733775251717}
+
+data: {"choices":[{"delta":{},"finish_reason":"stop","index":0}],"created":1789523368,"generated_tokens":17,"id":"chatcmpl-1789523368","model":"gemma4","object":"chat.completion.chunk","tps":34.99733775251717}
+
+data: [DONE]
+

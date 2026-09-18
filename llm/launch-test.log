@@ -1,0 +1,11 @@
+モデルをロードしています。ログ: /home/shinko/pcie_work/llm/card.log
+ブラウザで http://localhost:8080 を開いてください。終了: Ctrl+C
+Gemma4 VLM: http://127.0.0.1:8080
+127.0.0.1 - - [16/Sep/2026 10:52:34] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 10:52:34] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 10:52:34] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 10:52:34] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 10:52:34] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [16/Sep/2026 10:52:35] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 10:52:35] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [16/Sep/2026 10:52:40] "POST /api/transcribe HTTP/1.1" 200 -

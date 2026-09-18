@@ -1,0 +1,36 @@
+Loading gemma4: /workspace/neat/models_genai/gemma-4-E2B-it-GPTQ-a16w4
+[mlatiming] mlashm_load_models bulk took 4371 ms ok=1
+Loading whisper: /workspace/neat/models_genai/whisper-small-a16w8
+
+Number of generated tokens: 2
+TTFT: 0.18s
+TPS: max=32.88, avg=32.88, mid=32.88, min=32.88
+[mlatiming] mlashm_load_models bulk took 3428 ms ok=1
+
+Number of generated tokens: 1
+TTFT: 0.09s
+READY http://10.0.0.2:9998 ['gemma4', 'whisper']
+
+Number of generated tokens: 19
+TTFT: 0.08s
+TPS: max=35.19, avg=35.02, mid=35.03, min=34.75
+
+Number of generated tokens: 17
+TTFT: 0.24s
+TPS: max=35.00, avg=34.80, mid=34.83, min=34.40
+
+Number of generated tokens: 7
+TTFT: 0.09s
+TPS: max=127.55, avg=126.50, mid=127.37, min=122.85
+
+Number of generated tokens: 3
+TTFT: 0.08s
+TPS: max=35.03, avg=34.89, mid=34.75, min=34.75
+
+Number of generated tokens: 25
+TTFT: 0.24s
+TPS: max=34.78, avg=34.63, mid=34.63, min=34.37
+
+Number of generated tokens: 5
+TTFT: 0.09s
+TPS: max=126.62, avg=125.14, mid=125.30, min=122.28
