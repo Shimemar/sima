@@ -1,0 +1,8 @@
+Text: Gemma4
+こんにちは。
+0.4秒
+Image: Gemma4
+画像は主に緑色で、中央に三角形の形をしたシンボルが描かれています。
+0.8秒
+Audio: tami a job please
+Browser smoke passed: IME, text, camera, image, microphone, ASR, reset; no JS errors.
