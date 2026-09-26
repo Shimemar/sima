@@ -69,49 +69,6 @@ YOLOはパノプティックセグメンテーションを直接出力しない�
 - **stuff** (壁/床/天井/ドア): LRASPP-MobileNetV3-Large (自宅映像の擬似ラベルで学習)
 - **教師** (擬似ラベル生成): UperNet-ConvNeXt-small (ADE20K)
 
-#### 主なファイル
-
-| ファイル | 用途 |
-|---|---|
-| `start.md` | 起動方法だけをまとめたクイックスタート |
-| `panoptic_webcam.py` | PC検証 (webcam + YOLO-seg + 教師 + 統合) |
-| `record_frames.py` | 学習用フレーム録画 |
-| `make_pseudo_labels.py` | 教師による擬似ラベル生成 |
-| `train_student.py` | 生徒モデル学習 |
-| `export_onnx.py` | ONNXエクスポート + 検証 |
-| `quantize_compile.py` | Palette量子化・コンパイル |
-| `attention_surgery.py` | C2PSA MatMul→Einsum置換 |
-| `eval_quantized.py` | 量子化後の精度検証 |
-| `main.py` | Modalixパイプライン本体 |
-| `probe_camera.py` | USBカメラ検出・設定ヘルパー |
-| `config/` | カメラ・モデル・しきい値・UDP出力の設定ファイル |
-
-#### 起動方法
-
-初回: USBカメラの検出・設定
-```bash
-dk ./probe_camera.py                                 # USBカメラを検出
-dk ./probe_camera.py --device /dev/videoNN --apply   # config に反映
-```
-
-本番起動
-```bash
-dk ./main.py --config ./config/default.conf --frames 300    # 有限フレームでテスト
-dk ./main.py --config ./config/default.conf                 # 無制限実行
-```
-
-#### 実績
-
-- **実物のUSBカメラでの動作確認済み** (Anker PowerConf C200、1280x720@30)
-- **実測性能**: 約6.9fps (Step 4の最適化適用後)
-- **モデルサイズ**:
-  - 生徒モデル (LRASPP): 6.0MB
-  - YOLO (attention Einsum化 + ヘッド切断): 11MB
-- **精度**:
-  - 生徒モデル val mIoU: 0.863 (INT8量子化後、FP32: 0.879)
-  - マスク輪郭・壁/床領域の位置判定: 目視で許容範囲
-
-詳細な設計・工程記録は `Yolo_panoptic/README.md` を参照してください。
 
 ### 6. Readme.txt
 
