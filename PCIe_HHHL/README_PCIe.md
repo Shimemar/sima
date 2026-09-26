@@ -76,7 +76,6 @@ YOLOv8s モデルは PCIe チュートリアルから参照できる位置にも
 展開済み extras の次のチュートリアルを対象に、Python 実行および C++ ターゲットのビルド・実行を試行した。
 
 作業場所:
-
 ```text
 /home/shinko/pcie_work/sima-pcie-host-0.4.0-Linux-amd64-extras
 ```
