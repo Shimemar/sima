@@ -57,7 +57,7 @@ OLED 表示デバイス向けの簡易制御/テストコードが含まれて�
 - 表示テスト
 - デバイス制御のサンプル
 
-### 5. Yolo_panoptic — 室内パノプティックセグメンテーション (Modalix向け)
+### 5. Yolo_panoptic — 室内パノプティックセグメンテーション
 
 USB webcamの映像から、家の中の **物(インスタンス)** と **壁・床・天井・ドア(領域)** を画素単位で認識する Modalix DevKit 用アプリです。最終ターゲットは SiMa.ai Modalix DevKit(Palette / Neat SDK)。
 
