@@ -1,0 +1,13 @@
+2026-09-26 10:53:11,154 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_94, source_name ['/model.10/m/m.0/attn/qkv/conv/Conv'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected for integer convolution.
+2026-09-26 10:53:11,154 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_94, source_name ['/model.10/m/m.0/attn/qkv/conv/Conv'], Saturation was detected for integer convolution. Weights were set to zero to avoid numeric saturation. This could cause potential quantization problems in later layers. If that happens, please switch to bfloat16 quantization.
+[quantize] yolo11n-seg_cut.onnx (fixed-batch, C2PSA workaround) ...
+Running Calibration ...Running Calibration ...DONE
+Running quantization ...Running quantization ...DONE
+
+[yolo] val images: 21  score_thr=0.25
+[yolo] detections FP32=60  INT8=64  matched(IoU>0.5)=22
+[yolo] class flips among matched: 3
+[yolo] box max-abs-err (px): mean 2.31  max 6.35
+[yolo] score max-abs-err   : mean 0.250  max 0.430
+[yolo] top-1 anchor score (regardless of threshold): FP32 mean 0.279  INT8(same anchor) mean 0.242
+[yolo] top-1 anchor/class changed after quantization: 14/21
