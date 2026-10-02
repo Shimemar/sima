@@ -1,7 +1,5 @@
 # sima
 
-![mViewer screenshot](PCIe_HHHL/mViewer/Screenshot%20from%202026-10-02%2021-37-51.png)
-
 このリポジトリは、SiMa / Modalix 関連の実験、検証、デモ、PCIe/DevKit 周りの開発成果物をまとめたワークスペースです。
 主に、DevKit 向けアプリケーション、PCIe Host 向け検証コード、環境ごとの動作メモを格納しています。
 
@@ -56,3 +54,6 @@ PCIe 関連の手順書や検証メモです。
 
 このリポジトリは実験用・検証用のワークスペースとして管理されており、実行環境やモデル配置パス、ホスト情報がファイル内に記載されていることがあります。
 そのため、各ディレクトリの README と設定ファイルを参照しながら利用するのが適切です。
+
+![mViewer screenshot](PCIe_HHHL/mViewer/Screenshot%20from%202026-10-02%2021-37-51.png)
+
