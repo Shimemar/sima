@@ -1,16 +1,17 @@
 SIMA PCIe Setup memo
 
-[HOST]
-#PCIe Hardware 
- https://developer.sima.ai/hardware/getting-started/pcie-mode
+ #Hardware
+ [HOST]
+ ##PCIe Hardware 
+   https://developer.sima.ai/hardware/getting-started/pcie-mode
 
-#Driver install
-sima-cli install drivers/linux
+ ##Driver install
+  sima-cli install drivers/linux
 
-#Verify and test
+ ##Verify and test
 sima-cli device discover
 
-#Virtual Network
+##Virtual Network
 shinko@simapc:~$ ip addr show dev veth-simaai
 7: veth-simaai: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 65536 qdisc fq_codel state UNKNOWN group default qlen 1000
     link/ether 00:53:49:4d:41:30 brd ff:ff:ff:ff:ff:ff
@@ -22,16 +23,15 @@ shinko@simapc:~$ ip addr show dev veth-simaai
 
 
 #Software 
-
 [HOST]
-#neat install
+##neat install
 network install or offline
 sima-cli neat install sdk@release-2.1
 
-#DevSync
+##DevSync
 sima-cli sdk setup --devkit {devkit-ip}
 
-#pcie co-processing
+##pcie co-processing
  https://developer.sima.ai/software/tutorials/before-you-run
  
 3. Set up PCIe tutorials
