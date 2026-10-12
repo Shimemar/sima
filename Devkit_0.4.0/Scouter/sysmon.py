@@ -1,10 +1,14 @@
 """Once-a-second system telemetry -> JSON lines, fsync'ed on every write so the record
 survives a sudden board reset (the point: the DevKit reset 30-40 s into HDMI runs on
 2026-10-02 with nothing in the journal). Logs board power (pyneat power module, PMIC
-rails over I2C), SoC/board temperatures, fan, load average, CmaFree."""
+rails over I2C), SoC/board temperatures, fan, load average, CmaFree.
+
+`history` keeps the last `history_len` (monotonic_t, temp_c, power_w) points for the HUD
+graph; `path=None` samples for the graph without writing a log."""
 
 from __future__ import annotations
 
+from collections import deque
 import glob
 import json
 import os
@@ -28,8 +32,9 @@ def _hwmon(name: str) -> str | None:
 
 
 class SysMon:
-    def __init__(self, path, interval_s: float = 1.0, extra=None) -> None:
-        self.path, self.interval_s = str(path), interval_s
+    def __init__(self, path, interval_s: float = 1.0, extra=None, history_len: int = 120) -> None:
+        self.path, self.interval_s = (str(path) if path else None), interval_s
+        self.history: "deque[tuple[float, float | None, float | None]]" = deque(maxlen=history_len)
         self.extra = extra or (lambda: {})
         self._stop = threading.Event()
         self._thread = threading.Thread(target=self._run, name="sysmon", daemon=True)
@@ -46,7 +51,7 @@ class SysMon:
             self._power_err = str(exc)
 
     def start(self) -> "SysMon":
-        self._f = open(self.path, "w", encoding="utf-8")
+        self._f = open(self.path, "w", encoding="utf-8") if self.path else None
         self._t0 = time.monotonic()
         self._thread.start()
         return self
@@ -88,9 +93,13 @@ class SysMon:
     def _run(self) -> None:
         while not self._stop.is_set():
             try:
-                self._f.write(json.dumps(self.sample(), ensure_ascii=False) + "\n")
-                self._f.flush()
-                os.fsync(self._f.fileno())
+                rec = self.sample()
+                temp = rec.get("soc_max_c", rec.get("board_c") or None)
+                self.history.append((time.monotonic(), temp, rec.get("power_w")))
+                if self._f is not None:
+                    self._f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                    self._f.flush()
+                    os.fsync(self._f.fileno())
             except Exception as exc:  # noqa: BLE001
                 print(f"sysmon: {exc}", flush=True)
             self._stop.wait(self.interval_s)
@@ -98,4 +107,5 @@ class SysMon:
     def close(self) -> None:
         self._stop.set()
         self._thread.join(timeout=2)
-        self._f.close()
+        if self._f is not None:
+            self._f.close()

@@ -57,6 +57,8 @@ LOW_SCORE_COLOR = (90, 128, 128)  # dark grey: raw low-score detections (debug o
 class Config:
     # --- webcam capture ---
     camera_device: str = "/dev/video16"
+    # benchmark input: loop this JPEG as fast as the pipeline accepts (no camera fps cap)
+    source_image: str = ""
     camera_flip: str = "none"
     capture_width: int = 1280
     capture_height: int = 720
@@ -122,6 +124,7 @@ class Config:
     vlm_prompt_version: int = 3
     hud_enabled: bool = True
     hud_countup_s: float = 1.5
+    hud_sysmon_graph: bool = True
     vlm_expected_s: float = 3.5
 
     frames: int = 0
@@ -139,8 +142,8 @@ FLOAT_KEYS = {"score_threshold", "nms_iou", "track_high_thresh", "track_low_thre
               "vlm_expected_s", "power_measure_weight", "vlm_min_track_age_s", "energy_window_s",
               "energy_noise_floor", "energy_full_scale", "model_stall_timeout_s", "hdmi_max_fps"}
 BOOL_KEYS = {"draw_raw_detections", "print_backend", "vlm_enabled", "vlm_dry_run", "hdmi_enabled",
-             "power_boost", "power_bonus", "hud_enabled"}
-STR_KEYS = {"camera_device", "camera_flip", "model_path", "udp_host", "track_log", "event_log", "sysmon_log",
+             "power_boost", "power_bonus", "hud_enabled", "hud_sysmon_graph"}
+STR_KEYS = {"camera_device", "source_image", "camera_flip", "model_path", "udp_host", "track_log", "event_log", "sysmon_log",
             "hdmi_driver",
             "vlm_model_dir", "vlm_results_log"}
 
@@ -207,6 +210,8 @@ def parse_args(argv: list[str] | None) -> Config:
     parser.add_argument("--config", type=Path,
                         default=Path(__file__).resolve().parent / "config" / "default.conf")
     parser.add_argument("--camera-device")
+    parser.add_argument("--source-image",
+                        help="ベンチマーク用: カメラの代わりにこのJPEGを最大速度でループ入力する")
     parser.add_argument("--camera-flip", choices=["none", "rotate-180", "horizontal-flip", "vertical-flip"])
     parser.add_argument("--model", help="YOLO26 archive (e.g. ./assets/yolo26n-det-bf16-mla_tess-b1.tar.gz)")
     parser.add_argument("--frames", type=int, help="0 = run forever")
@@ -235,6 +240,8 @@ def parse_args(argv: list[str] | None) -> Config:
         load_config_file(cfg, args.config)
     if args.camera_device is not None:
         cfg.camera_device = args.camera_device
+    if args.source_image is not None:
+        cfg.source_image = args.source_image
     if args.camera_flip is not None:
         cfg.camera_flip = args.camera_flip
     if args.model is not None:
@@ -297,9 +304,22 @@ def camera_fragment(cfg: Config) -> str:
     return frag
 
 
+def image_loop_fragment(cfg: Config) -> str:
+    """Benchmark source: decode one JPEG over and over, uncapped (framerate in the caps
+    only stamps timestamps; nothing throttles it), to find the pipeline's own ceiling."""
+    return (
+        f"multifilesrc location={resolve_app_path(cfg.source_image)} loop=true"
+        f" caps=image/jpeg,framerate=120/1"
+        f" ! jpegdec ! videoconvert n-threads=4 ! videoscale"
+        f" ! video/x-raw,format=NV12,width={cfg.capture_width},height={cfg.capture_height}"
+        f" ! queue leaky=downstream max-size-buffers=2"
+    )
+
+
 def build_source_run(cfg: Config):
     graph = pyneat.Graph(f"source_{cfg.capture_width}x{cfg.capture_height}")
-    graph.add(pyneat.nodes.custom(camera_fragment(cfg), pyneat.InputRole.Source))
+    frag = image_loop_fragment(cfg) if cfg.source_image else camera_fragment(cfg)
+    graph.add(pyneat.nodes.custom(frag, pyneat.InputRole.Source))
     graph.add(pyneat.nodes.output(pyneat.OutputOptions.every_frame(1)))
     run_opts = pyneat.RunOptions()
     run_opts.preset = pyneat.RunPreset.Realtime
@@ -965,12 +985,15 @@ def run(cfg: Config) -> int:
     events = EventLog(resolve_app_path(cfg.event_log) if cfg.event_log else None)
     hdmi, hdmi_q = None, None
     mon = None
-    if cfg.sysmon_log:
+    show_graph = hud is not None and cfg.hud_sysmon_graph
+    if cfg.sysmon_log or show_graph:
         import sysmon
-        mon = sysmon.SysMon(resolve_app_path(cfg.sysmon_log), extra=lambda: {
+        mon = sysmon.SysMon(resolve_app_path(cfg.sysmon_log) if cfg.sysmon_log else None, extra=lambda: {
             "frames": stats.processed, "fps": round(stats.fps(), 1),
             "vlm_busy": bool(vlm is not None and vlm.busy.is_set()),
             "hdmi_frames": hdmi.frames if hdmi is not None else None}).start()
+        if show_graph:
+            hud.telemetry = mon.history
     start = time.perf_counter()
 
     if cfg.hdmi_enabled:

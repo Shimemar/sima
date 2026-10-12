@@ -5,7 +5,8 @@ Per track: corner-bracket reticle + ID tag, then by VLM state:
   done              -> power count-up (ease-out), then a panel: ID / POWER LEVEL /
                        CLASS / VLM title / VLM comment
   done >= 100,000   -> count-up stalls at 99,999 -> ERROR flash -> 測 定 不 能 / OVERLOAD
-Plus a TEAM POWER list (top-left) and 本日の最高戦闘力 (top-right).
+Plus a TEAM POWER list (top-left), 本日の最高戦闘力 (top-right), and SoC temperature / board
+power graphs (bottom-right) from sysmon.SysMon.history when `telemetry` is set.
 
 Japanese text uses PIL + Noto Sans CJK (present on the DevKit image); every distinct
 (text, size) string is rasterized once into an alpha mask and cached, so steady-state
@@ -125,6 +126,7 @@ class ScouterHud:
         self.best_power = 0
         self.best_title = ""
         self._placed: list[tuple[int, int, int, int]] = []
+        self.telemetry = None   # sysmon.SysMon.history: deque of (monotonic_t, temp_c, power_w)
 
     def put(self, frame, text: str, x: int, y: int, size: int, color) -> tuple[int, int]:
         return blend_mask(frame, self.text.mask(text, size), x, y, color)
@@ -240,9 +242,57 @@ class ScouterHud:
             if overload and int(since * 3) % 2 == 0:
                 self.put(frame, "WARNING  SCOUTER OVERLOAD", px + 10, py + ph + 4, 18, RED)
 
+    # -- telemetry graph (bottom-right) --------------------------------------------
+    TELE_W, TELE_H, TELE_WINDOW_S = 300, 146, 120.0
+
+    def _graph(self, frame, pts, now: float, x: int, y: int, label: str, unit: str,
+               min_span: float, color, warn: float | None) -> None:
+        """One labelled sparkline: `pts` = [(monotonic_t, value)], x axis = last
+        TELE_WINDOW_S seconds (scrolls left), y axis auto-ranged (at least `min_span`)."""
+        gw, gh = self.TELE_W - 16, 44
+        gx, gy = x + 8, y + 22
+        vals = [v for _, v in pts]
+        cur = vals[-1] if vals else None
+        if cur is not None and warn is not None and cur >= warn:
+            color = RED
+        self.put(frame, label, gx, y + 1, 16, DIM_GREEN)
+        if cur is not None:
+            cv2.putText(frame, f"{cur:5.1f}{unit}", (gx + 112, y + 18), cv2.FONT_HERSHEY_SIMPLEX,
+                        0.55, color, 1, cv2.LINE_AA)
+            cv2.putText(frame, f"max {max(vals):.1f}", (gx + 200, y + 18), cv2.FONT_HERSHEY_SIMPLEX,
+                        0.4, DIM_GREEN, 1, cv2.LINE_AA)
+        cv2.rectangle(frame, (gx, gy), (gx + gw, gy + gh), DIM_GREEN, 1)
+        if not vals:
+            return
+        lo, hi = min(vals), max(vals)
+        if hi - lo < min_span:
+            mid = (hi + lo) / 2
+            lo, hi = mid - min_span / 2, mid + min_span / 2
+        cv2.putText(frame, f"{hi:.0f}", (gx + 3, gy + 11), cv2.FONT_HERSHEY_SIMPLEX, 0.32,
+                    DIM_GREEN, 1, cv2.LINE_AA)
+        cv2.putText(frame, f"{lo:.0f}", (gx + 3, gy + gh - 3), cv2.FONT_HERSHEY_SIMPLEX, 0.32,
+                    DIM_GREEN, 1, cv2.LINE_AA)
+        poly = np.array([(gx + gw - (now - t) / self.TELE_WINDOW_S * gw,
+                          gy + gh - 2 - (v - lo) / (hi - lo) * (gh - 4)) for t, v in pts],
+                        np.float32)
+        poly[:, 0] = np.clip(poly[:, 0], gx, gx + gw)
+        cv2.polylines(frame, [poly.round().astype(np.int32)], False, color, 2, cv2.LINE_AA)
+
+    def draw_telemetry(self, frame, now: float) -> None:
+        fh, fw = frame.shape[:2]
+        x, y = fw - 8 - self.TELE_W, fh - 30 - 6 - self.TELE_H
+        hist = list(self.telemetry)   # snapshot: sysmon thread appends concurrently
+        temps = [(t, c) for t, c, _ in hist if c is not None and now - t <= self.TELE_WINDOW_S]
+        watts = [(t, w) for t, _, w in hist if w is not None and now - t <= self.TELE_WINDOW_S]
+        darken(frame, x, y, x + self.TELE_W, y + self.TELE_H)
+        self._graph(frame, temps, now, x, y + 2, "SoC TEMP", "C", 5.0, AMBER, warn=85.0)
+        self._graph(frame, watts, now, x, y + 74, "BOARD POWER", "W", 2.0, GREEN, warn=None)
+
     def draw(self, frame, tracks, vlm, now: float, status: str) -> None:
         fh, fw = frame.shape[:2]
         self._placed = [(8, 8, 292, 200), (fw - 360, 8, 352, 60)]  # team list / best-power corners
+        if self.telemetry is not None:
+            self._placed.append((fw - 8 - self.TELE_W, fh - 36 - self.TELE_H, self.TELE_W, self.TELE_H))
         team = []
         for t in tracks:
             a = vlm.get(t.track_id) if vlm is not None else None
@@ -274,5 +324,7 @@ class ScouterHud:
             darken(frame, fw - w - 24, 8, fw - 8, 64)
             self.put(frame, label, fw - w - 16, 12, 20, AMBER)
             self.put(frame, self.best_title, fw - w - 16, 38, 18, WHITE)
+        if self.telemetry is not None:
+            self.draw_telemetry(frame, now)
         darken(frame, 0, fh - 30, fw, fh)
         self.put(frame, status, 10, fh - 28, 18, DIM_GREEN)
