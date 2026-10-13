@@ -1,0 +1,151 @@
+[INFO] ------------------------------------------------------------
+[INFO] Model Compiler Version: 2.1.3
+[INFO] Python Version: 3.12.3
+[INFO] Output Directory: /workspace/AIsonar/build/midas_v21_small_256_mla
+[INFO] ------------------------------------------------------------
+[INFO] Preparing ONNX model: /workspace/AIsonar/assets/midas_v21_small_256_mla.onnx
+[INFO] Simplifying with fixed shapes: {'input': [1, 3, 256, 256]}
+[INFO] Prepared model saved to: /workspace/AIsonar/assets/midas_v21_small_256_mla_prepared.onnx
+[INFO] Model successfully loaded for modalix
+[INFO] Initializing quantization...
+[INFO] Loading real calibration data from: /workspace/AIsonar/calib
+2026-10-13 02:13:13,639 - afe.apis.loaded_net - INFO - Quantize loaded net, layout = NCHW, arm_only = False
+2026-10-13 02:13:13,639 - afe.apis.loaded_net - INFO - Calibration method = mse
+2026-10-13 02:13:49,452 - afe.ir.transform.calibration_transforms - INFO - Running Calibration ...
+2026-10-13 02:13:55,378 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 3 samples
+2026-10-13 02:14:01,296 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 6 samples
+2026-10-13 02:14:07,235 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 9 samples
+2026-10-13 02:14:13,216 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 12 samples
+2026-10-13 02:14:19,109 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 15 samples
+2026-10-13 02:14:25,016 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 18 samples
+2026-10-13 02:14:30,978 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 21 samples
+2026-10-13 02:14:36,979 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 24 samples
+2026-10-13 02:14:42,913 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 27 samples
+2026-10-13 02:14:48,811 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 30 samples
+2026-10-13 02:14:54,756 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 33 samples
+2026-10-13 02:15:00,677 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 36 samples
+2026-10-13 02:15:06,616 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 39 samples
+2026-10-13 02:15:12,589 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 42 samples
+2026-10-13 02:15:18,582 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 45 samples
+2026-10-13 02:15:24,482 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 48 samples
+2026-10-13 02:15:30,387 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 51 samples
+2026-10-13 02:15:36,322 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 54 samples
+2026-10-13 02:15:42,259 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 57 samples
+2026-10-13 02:15:48,266 - afe.ir.transform.calibration_transforms - INFO - Calibration progress: completed 60 samples
+2026-10-13 02:15:48,544 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_0, source_name ['Clip_7', 'Conv_5'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:48,544 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_0, source_name ['Clip_7', 'Conv_5'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:48,661 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_1, source_name ['Clip_10', 'Conv_8'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:48,661 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_1, source_name ['Clip_10', 'Conv_8'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:48,835 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_3, source_name ['Clip_15', 'Conv_13'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:48,835 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_3, source_name ['Clip_15', 'Conv_13'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:48,864 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_4, source_name ['Clip_19', 'Conv_17'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:48,864 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_4, source_name ['Clip_19', 'Conv_17'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:48,899 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_6, source_name ['Clip_24', 'Conv_22'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:48,960 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_7, source_name ['Clip_27', 'Conv_25'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:48,961 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_7, source_name ['Clip_27', 'Conv_25'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:48,961 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_7, source_name ['Clip_27', 'Conv_25'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected for integer convolution.
+2026-10-13 02:15:48,961 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_7, source_name ['Clip_27', 'Conv_25'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the zero point.
+2026-10-13 02:15:48,977 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_10, source_name ['Clip_33', 'Conv_31'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:48,980 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_11, source_name ['Clip_36', 'Conv_34'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the zero point.
+2026-10-13 02:15:49,034 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_17, source_name ['Clip_51', 'Conv_49'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,052 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_18, source_name ['Clip_54', 'Conv_52'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,071 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_21, source_name ['Clip_60', 'Conv_58'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,084 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_22, source_name ['Clip_63', 'Conv_61'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,102 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_26, source_name ['Clip_73', 'Conv_71'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the zero point.
+2026-10-13 02:15:49,133 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_28, source_name ['Clip_78', 'Conv_76'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,150 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_29, source_name ['Clip_81', 'Conv_79'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,150 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_29, source_name ['Clip_81', 'Conv_79'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:49,172 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_32, source_name ['Clip_87', 'Conv_85'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,183 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_33, source_name ['Clip_90', 'Conv_88'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,235 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_36, source_name ['Clip_96', 'Conv_94'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,269 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_37, source_name ['Clip_99', 'Conv_97'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,307 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_40, source_name ['Clip_105', 'Conv_103'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,344 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_41, source_name ['Clip_108', 'Conv_106'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,387 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_44, source_name ['Clip_114', 'Conv_112'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,422 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_45, source_name ['Clip_117', 'Conv_115'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,495 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_47, source_name ['Clip_122', 'Conv_120'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,496 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_47, source_name ['Clip_122', 'Conv_120'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:49,541 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_48, source_name ['Clip_125', 'Conv_123'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,541 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_48, source_name ['Clip_125', 'Conv_123'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the zero point.
+2026-10-13 02:15:49,594 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_51, source_name ['Clip_131', 'Conv_129'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,624 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_52, source_name ['Clip_134', 'Conv_132'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,624 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_52, source_name ['Clip_134', 'Conv_132'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the zero point.
+2026-10-13 02:15:49,669 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_55, source_name ['Clip_140', 'Conv_138'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,714 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_56, source_name ['Clip_143', 'Conv_141'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,768 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_59, source_name ['Clip_149', 'Conv_147'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,826 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_60, source_name ['Clip_152', 'Conv_150'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,826 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_60, source_name ['Clip_152', 'Conv_150'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the zero point.
+2026-10-13 02:15:49,880 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_63, source_name ['Clip_158', 'Conv_156'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,926 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_64, source_name ['Clip_162', 'Conv_160'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:49,926 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_64, source_name ['Clip_162', 'Conv_160'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the zero point.
+2026-10-13 02:15:50,013 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_66, source_name ['Clip_167', 'Conv_165'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,083 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_67, source_name ['Clip_170', 'Conv_168'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,172 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_70, source_name ['Clip_176', 'Conv_174'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,267 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_71, source_name ['Clip_179', 'Conv_177'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,357 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_74, source_name ['Clip_185', 'Conv_183'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,466 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_75, source_name ['Clip_188', 'Conv_186'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,466 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_75, source_name ['Clip_188', 'Conv_186'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:50,600 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_78, source_name ['Clip_194', 'Conv_192'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,601 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_78, source_name ['Clip_194', 'Conv_192'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:50,689 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_79, source_name ['Clip_197', 'Conv_195'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,783 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_82, source_name ['Clip_203', 'Conv_201'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:50,889 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_83, source_name ['Clip_206', 'Conv_204'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:51,018 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_86, source_name ['Clip_212', 'Conv_210'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:51,018 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_86, source_name ['Clip_212', 'Conv_210'], All weights in some channels are zero.  Please consider re-training the model.
+2026-10-13 02:15:51,138 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_87, source_name ['Clip_215', 'Conv_213'], Precision of weights was reduced to avoid numeric saturation. Saturation was detected in the bias term.
+2026-10-13 02:15:51,138 - afe.ir.defines - WARNING - In node MLA_0/conv2d_add_clip_87, source_name ['Clip_215', 'Conv_213'], All weights in some channels are zero.  Please consider re-training the model.
+Running Calibration ...Running Calibration ...DONE
+Running quantization ...Running quantization ...DONE
+[INFO] Quantized model saved.
+[INFO] ------------------------------------------------------------
+[INFO] Internal graph structure (for tessellate parameters):
+[INFO]   Input node names: ['input']
+[INFO]   Output node name: dequantize_1
+[INFO]   All nodes:
+[INFO]     PLACEHOLDER: input
+[INFO] ------------------------------------------------------------
+[INFO] Compiling for modalix with batch size 1...
+2026-10-13 02:15:52,279 - afe.apis.model - INFO - Compiling quantized net "midas_v21_small_256_mla"
+2026-10-13 02:15:52,305 - afe.core.compile_networks - INFO - The model is split into 1 segments for MLA and APU
+2026-10-13 02:15:52,305 - afe.backends.mla.afe_to_n2a_compiler.n2a_compiler_operations - INFO - Stage 1 of 1: compiling for MLA
+2026-10-13 02:15:52,325 - mlc.compiler.model_graph.l1_based - INFO - Get model compilation properties
+2026-10-13 02:15:52,327 - mlc.compiler.model_graph.l1_based - INFO - Checking if layers fit into memory without splitting
+2026-10-13 02:15:52,327 - mlc.compiler.model_graph.l1_based - INFO - Generating the list of feasible layouts
+2026-10-13 02:15:52,327 - mlc.compiler.model_graph.l1_based - INFO - Setting layer parameters
+2026-10-13 02:16:09,307 - mlc.compiler.model_graph.l1_based - INFO - Trigger large tensor support due to: MLA_0/image.resize2d_133, 324
+2026-10-13 02:16:09,308 - mlc.compiler.model_graph.l1_based - INFO - Segmenting layers by spatial/channel dimension
+2026-10-13 02:16:27,883 - mlc.compiler.model_graph.large_tensor_helper - INFO - Setting tile layouts
+2026-10-13 02:16:38,418 - mlc.compiler.model_graph.large_tensor_helper - INFO - Allocating memory for IFM/OFM tensors
+2026-10-13 02:16:38,547 - mlc.compiler.model_graph.l1_based - INFO - Get model compilation properties done
+2026-10-13 02:16:38,594 - afe.backends.mla.afe_to_n2a_compiler.n2a_compiler_operations - INFO - Input MLA_0/placeholder_0_0: Tessellation is not implemented on MLA
+2026-10-13 02:16:38,595 - afe.backends.mla.afe_to_n2a_compiler.n2a_compiler_operations - INFO - Output MLA_0/conv2d_add_relu_135_output: De-tessellation is not implemented on MLA
+2026-10-13 02:16:38,677 - afe.backends.mla.afe_to_n2a_compiler.n2a_backend_runner - INFO - Start evaluate process to generate check file
+2026-10-13 02:16:38,678 - mlc.kernel.layout - INFO - L2 caching mode: L2CachingMode.NONE
+2026-10-13 02:16:38,702 - mlc.compiler.model_graph.l1_based - INFO - Generating model code
+2026-10-13 02:16:52,392 - mlc.compiler.model_graph.l1_based - INFO - Generating model code done
+2026-10-13 02:16:52,610 - mlc.test_util.test_context - INFO - Scheduling instructions
+2026-10-13 02:17:05,015 - mlc.test_util.test_context - INFO - Performing DRAM/L2 synchronization
+2026-10-13 02:17:07,030 - mlc.test_util.test_context - INFO - Inserting and merging NOPs
+2026-10-13 02:17:07,789 - mlc.test_util.test_context - INFO - Setting IQ sync bits
+2026-10-13 02:17:07,907 - mlc.test_util.test_context - INFO - Run compression
+2026-10-13 02:17:10,099 - mlc.test_util.test_context - INFO - Compression done in 2s. Compression ratio: 0.902
+2026-10-13 02:17:10,099 - mlc.test_util.test_context - INFO - Re-allocate dram memory
+2026-10-13 02:17:10,160 - mlc.test_util.test_context - INFO - Generating metrics
+2026-10-13 02:17:10,442 - mlc.test_util.test_context - INFO - Writing report to MLC file
+2026-10-13 02:17:10,442 - mlc.test_util.test_context - INFO - Writing instructions to MLC file
+2026-10-13 02:17:21,085 - mlc.test_util.test_context - INFO - Code generation done
+2026-10-13 02:17:21,086 - afe.backends.mla.afe_to_n2a_compiler.n2a_compiler_operations - INFO -   Evaluate model and writing chk file done in 12s.
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - ==============================
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - Compilation summary:
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - ------------------------------
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - Desired batch size: 1
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - Achieved batch size: 1
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - ------------------------------
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - Plugin distribution per backend:
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - 	MLA : 1
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - 	EV74: 4
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - 	A65 : 0
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - ------------------------------
+2026-10-13 02:17:31,709 - afe.backends.mpk.interface - INFO - Generated files: 0_process_mla.json, 0_preproc.json, 0_quanttess.json, midas_v21_small_256_mla_stage1_mla_stats.yaml, pipeline_sequence.json, 0_boxdecoder.json, 0_postproc.json, midas_v21_small_256_mla_mpk.json, midas_v21_small_256_mla_stage1_mla.elf, quantize_compile.py
+[INFO] Quantization manifest saved to: /workspace/AIsonar/build/midas_v21_small_256_mla/quantization_manifest.json
+[INFO] Compilation complete.

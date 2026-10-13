@@ -1,0 +1,24 @@
+[DevKit] executing remotely on sima@10.42.0.76:22 -> /workspace/AIsonar/./main.py
+[DevKit] cwd: /workspace/AIsonar
+[DevKit] argv: /workspace/AIsonar/./main.py __NONE__ /workspace/AIsonar nfs --frames 450 --snapshot /workspace/AIsonar/output/sonar_test2.png
+[DEVKIT][STDERR] Model loaded: midas_v21_small_256_mla_mpk (package storage: NVMe, runtime package path: /media/nvme/simaai/coprocessing/models/proc_1961/pkg_511106d54dc00d95/midas_v21_small_256_mla_mpk)
+[DEVKIT][STDERR] [WARN] Model preprocess planner produced 41 advisory messages; set Model::Options.verbose.level=Verbose or Model::Options.verbose.planner=true to inspect details.
+[DEVKIT][STDERR] [1/4] Initializing runtime...
+[DEVKIT][STDERR] [2/4] Preparing input stream...
+[DEVKIT][STDERR] [3/4] Building graph...
+[DEVKIT][STDERR] [4/4] Graph ready (139 ms)
+[DEVKIT][STDOUT] Model: midas_v21_small_256_mla_mpk.tar.gz loaded in 0.7s
+[DEVKIT][STDERR] /workspace/AIsonar/./main.py:132: UserWarning: pyneat.InputOptions.use_simaai_pool is deprecated. Set InputOptions.memory_policy instead.
+[DEVKIT][STDERR]   input_opt.use_simaai_pool = False
+[DEVKIT][STDERR] [1/4] Initializing runtime...
+[DEVKIT][STDERR] [2/4] Preparing input stream...
+[DEVKIT][STDERR] [3/4] Building graph...
+[DEVKIT][STDERR] [4/4] Graph ready (60 ms)
+[DEVKIT][STDOUT] Video: 1280x720@30 H.264/RTP -> udp://10.42.0.1:9000
+[DEVKIT][STDOUT]   Viewer: Insight, or gst-launch-1.0 -v udpsrc port=9000 caps="application/x-rtp,media=video,encoding-name=H264,payload=96" ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink sync=false
+[DEVKIT][STDERR] [WARN] InputOptions::use_simaai_pool is deprecated. Set InputOptions::memory_policy instead.
+[DEVKIT][STDOUT] [150] out=31.0fps depth=19.0fps infer=7.7ms render=15.7ms sent=150 dropped=0
+[DEVKIT][STDOUT] [300] out=31.0fps depth=15.0fps infer=7.0ms render=21.9ms sent=300 dropped=0
+[DEVKIT][STDOUT] Done: 450 frames in 15.0s (29.9 fps out), depth frames=234 (15.6 fps), sent=450 dropped=0
+[DEVKIT][STDOUT]   MLA infer mean=8.1ms p95=8.6ms | depth total mean=18.9ms p95=20.1ms | render+nv12 mean=17.3ms p95=22.6ms
+[DEVKIT][STDOUT] Snapshot -> /workspace/AIsonar/output/sonar_test2.png
